@@ -39,12 +39,11 @@ class SdnNetworkTopo(Topo):
         h3 = self.addHost('h3')
         h4 = self.addHost('h4')
 
-
         # Add the links between hosts and switches
-        self.addLink(h1, s1)
-        self.addLink(h2, s1)
-        self.addLink(h3, s2)
-        self.addLink(h4, s2)
+        self.addLink(s1, h1,bw =100, delay='2ms')
+        self.addLink(s1, h2)
+        self.addLink(s2, h3)
+        self.addLink(s2, h4)
 
         # Add the link between the two switches
         self.addLink(s1, s2)
