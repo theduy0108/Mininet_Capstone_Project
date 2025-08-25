@@ -16,10 +16,6 @@ The connections are:
 
 # Import necessary Mininet classes for topology definition and network creation
 from mininet.topo import Topo
-from mininet.net import Mininet
-from mininet.node import OVSSwitch, RemoteController
-from mininet.cli import CLI
-from mininet.log import setLogLevel, info
 
 
 class SdnNetworkTopo(Topo):
@@ -31,19 +27,19 @@ class SdnNetworkTopo(Topo):
         """
         Create the topology.
         """
-        info('*** Adding switches\n')
+
         # Add two OpenFlow switches
         s1 = self.addSwitch('s1')
         s2 = self.addSwitch('s2')
 
-        info('*** Adding hosts\n')
+
         # Add four hosts
         h1 = self.addHost('h1')
         h2 = self.addHost('h2')
         h3 = self.addHost('h3')
         h4 = self.addHost('h4')
 
-        info('*** Creating links\n')
+
         # Add the links between hosts and switches
         self.addLink(h1, s1)
         self.addLink(h2, s1)
@@ -58,21 +54,3 @@ class SdnNetworkTopo(Topo):
 topos = {'sdnnetwork': (lambda: SdnNetworkTopo())}
 
 
-def run_network():
-    """
-    Initializes and runs the network with the custom topology.
-    """
-    # Set the logging level to 'info' for useful output
-    setLogLevel('info')
-
-    # Create a Mininet object with the custom topology
-    net = Mininet(
-        topo=SdnNetworkTopo(),
-        controller=None,
-        switch=OVSSwitch
-    )
-
-
-if __name__ == '__main__':
-    # Call the main function to run the network
-    run_network()
